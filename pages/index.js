@@ -27,7 +27,7 @@ export default function Home() {
 
 
   return<Layout>
-    <div className="text-blue-600 flex justify-between">
+    <div className="text-green-600 flex justify-between">
       <h2>
         Hola,<b> {session?.user?.name}</b> 
       </h2>

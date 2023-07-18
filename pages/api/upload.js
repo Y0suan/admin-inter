@@ -4,13 +4,11 @@ import fs from 'fs';
 import { mongooseConnect } from '@/lib/mongoose';
 import { isAdminRequest } from './auth/[...nextauth]';
 
-const cloudinaryConfig = {
-  cloud_name: 'dzqdjsrez',
-  api_key: '424676217557484',
-  api_secret: 'oiVBuiv0hEdureUDtNg_bCV90_8',
-};
-
-cloudinary.v2.config(cloudinaryConfig);
+cloudinary.config({ 
+  cloud_name: 'dp3imi0w7', 
+  api_key: '882252371254843', 
+  api_secret: 'RfJoNh3uzglzHwPKWNzJE_0ldUE' 
+});
 
 export default async function handle(req, res) {
   await mongooseConnect();
@@ -31,9 +29,9 @@ export default async function handle(req, res) {
 
     for (const file of files.file) {
       const result = await cloudinary.v2.uploader.upload(file.path, {
-        folder: 'agenda-next-panel',
+        folder: 'intercolegiales',
         resource_type: 'auto',
-        tags: 'agenda-next-panel',
+        tags: 'intercolegiales',
       });
 
       const link = result.secure_url;
