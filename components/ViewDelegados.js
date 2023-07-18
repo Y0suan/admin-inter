@@ -30,7 +30,7 @@ export default function ViewDelegados({
             </table>
             <ul>
           {delegados.map((delegado) => (
-            <li>
+            <li key={delegado.dni} >
               Nombre: {delegado.nombre}, DNI: {delegado.dni}, Contacto: {delegado.contacto}
             </li>
           ))}
