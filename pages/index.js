@@ -7,22 +7,6 @@ import Image from "next/image";
 
 export default function Home() {
   const {data:session}=useSession();
-
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("/api/products");
-        const lastThreeProducts = response.data.slice(-4); // Obtener los últimos 3 productos
-        setProducts(lastThreeProducts);
-      } catch (error) {
-        console.error("Error al recuperar los productos:", error);
-      }
-    };
-    fetchProducts();
-  }, []);
-  
   
 
 
