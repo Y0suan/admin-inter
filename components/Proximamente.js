@@ -7,7 +7,7 @@ export default function Proximamente(){
             <span class='text-white font-bold text-3xl w-min' >
                 Panel de Administracion de la Pagina de          
             <span class='m-2'>
-             Olinpiadas Eldorado
+             Olimpiadas Eldorado
             </span>
             </span>
             <img src="https://res.cloudinary.com/dzqdjsrez/image/upload/v1686580189/agenda-next-panel/cfkdyktufni2x3livpnk.png" ></img> 
