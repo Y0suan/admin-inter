@@ -6,6 +6,7 @@ import { withSwal } from 'react-sweetalert2';
 function Categories({ swal }) {
   const [editedCategory, setEditedCategory] = useState(null);
   const [name, setName] = useState('');
+  const [reglamento,setReglamento] = useState ('');
   const [parentCategory, setParentCategory] = useState('');
   const [categories, setCategories] = useState([]);
   const [properties,setProperties] = useState([]);
@@ -23,6 +24,7 @@ function Categories({ swal }) {
     ev.preventDefault();
     const data = {
       name,
+      reglamento,
       parentCategory,
       properties:properties.map(p => ({
         name:p.name,
@@ -37,6 +39,7 @@ function Categories({ swal }) {
       await axios.post('/api/categories', data);
     }
     setName('');
+    setReglamento('');
     setParentCategory('');
     setProperties([]);
     fetchCategories();
@@ -45,6 +48,7 @@ function Categories({ swal }) {
   function editCategory(category){
     setEditedCategory(category);
     setName(category.name);
+    setReglamento(category.reglamento);
     setParentCategory(category.parent?._id);
     setProperties(
       category.properties.map(({name,values}) => ({
@@ -104,14 +108,16 @@ function Categories({ swal }) {
   }
   return (
     <Layout>
-      <h1>Categorias</h1>
+      <h1>Deportes</h1>
       <label>
         {editedCategory
           ? `Editar Deporte ${editedCategory.name}`
           : 'Agrega un Deporte'
         }
       </label>
-      <form onSubmit={saveCategory}>
+      <form onSubmit={saveCategory}
+      className="flex flex-col"
+      >
         <div className="flex gap-1">
         <input
           type="text"
@@ -160,6 +166,16 @@ function Categories({ swal }) {
             </div>
           ))}
         </div>
+
+        <div  className="mb-2" >
+          <label >Reglamento</label>
+            <textarea 
+              placeholder="reglamento"
+              value={reglamento}
+              onChange={ev => setReglamento(ev.target.value)}
+            />
+        </div>
+
         <div className="flex gap-1">
         {editedCategory && (
         <button 
@@ -175,9 +191,10 @@ function Categories({ swal }) {
             Cancelar
         </button>
         )}
+        
         <button 
             type='submit' 
-            className="btn-primary py-1">
+            className="btn-primary py-1 ">
             Guardar
         </button>
         </div>

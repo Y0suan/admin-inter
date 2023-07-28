@@ -102,6 +102,7 @@ export default function EventoForm({
       }
     }
     
+    console.log(productProperties);
     
     return(
             <form onSubmit={saveEvent}>
