@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-export default function Eventos(){
+export default function Resultados(){
     const [products,setProducts] = useState([]);
     useEffect(()=>{
         axios.get('/api/eventos').then(response =>{
@@ -12,24 +12,26 @@ export default function Eventos(){
         })
     },[]);
 
-    const filteredProducts = products.filter(product => !product.ganador);
+
+    const filteredProducts = products.filter(product => product.ganador && product.ganador);
+    console.log( products )
 
     return(
         <Layout>
-            <Link className="btn-primary" href={'/eventos/new'}>
-             Agrega un Evento
-            </Link>
+            <h1>Resultados</h1>
             <table className="basic mt-2 ">
                 <thead>
                     <tr>
-                      <td>Nombre del Evento</td>
-                      <td></td>
+                      <td>Participantes</td>
+                      <td>Ganador</td>
                     </tr>
                 </thead>
                 <tbody>
                     {filteredProducts.map(product => (
                         <tr key={product._id} >
                             <td>{product.equipoA} vs {product.equipoB}</td>
+                            <td>{product.ganador}</td>
+
                             <td>
                                 <Link className="btn-default" href={'/eventos/edit/'+product._id}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
@@ -43,14 +45,6 @@ export default function Eventos(){
                                 </svg>
                                     Eliminar
                                 </Link>
-
-                                <Link className="btn-default" href={'/eventos/resultados/'+product._id}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
-                                </svg>
-                                    Resultados
-                                </Link>
-
                             </td>
                         </tr>
                     ))}

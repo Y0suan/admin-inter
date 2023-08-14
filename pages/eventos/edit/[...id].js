@@ -18,7 +18,7 @@ export default function EditEventPage() {
   }, [id]);
   return (
     <Layout>
-      <h1>Edit Evento</h1>
+      <h1>Editar Evento</h1>
       {productInfo && (
         <EventoForm {...productInfo} />
       )}

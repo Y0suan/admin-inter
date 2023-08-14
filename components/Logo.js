@@ -15,12 +15,6 @@ export default function Logo(){
         <span className="text-lg">
             Eldorado
         </span>
-        {/* <div className="flex flex-col items-center">
-        <img src={session?.user?.image} alt="" className="w-12 h-12 rounded-full"/>
-        <span className="px-2 font-medium text-black">
-        {session?.user?.name}
-        </span>
-        </div> */}
         </Link>
     )
 }

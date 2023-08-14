@@ -6,7 +6,7 @@ import { ReactSortable } from "react-sortablejs";
 import Image from "next/image";
 
 
-export default function EventoForm({
+export const ResultadosForm = ({
   _id,
   title: existingTitle,
   category: assignedCategory, 
@@ -17,9 +17,11 @@ export default function EventoForm({
   ecuela: assignedEscuelas,
   equipoA:existingEquipoA,
   equipoB:existingEquipoB,
+
   ganador:existingGanador,
-}) {
-  const [title, setTitle] = useState(existingTitle || '');
+  }) => {
+
+const [title, setTitle] = useState(existingTitle || '');
   const [category, setCategory] = useState(assignedCategory || '');
   const [escuelas, setEscuelas] = useState(assignedEscuelas || '');
   const [hubicacion,setHubicacion] = useState(existingHubicacion || '');
@@ -32,6 +34,7 @@ export default function EventoForm({
 
   const [equipoA, setEquipoA] = useState(existingEquipoA || '');
   const [equipoB, setEquipoB] = useState(existingEquipoB || '');
+
 
   const [ganador, setGanador] = useState(existingGanador || '');
 
@@ -102,103 +105,36 @@ export default function EventoForm({
         }
       }
     }
-    
-    console.log(productProperties);
-    
-    return(
-            <form onSubmit={saveEvent}>
+
+
+
+  return (
+<form onSubmit={saveEvent}>
             
-            <label>Nombre del Evento</label>
-            <input 
-              type='text' 
-              placeholder="nombre del Evento"
-              value={title}
-              onChange={ev => setTitle(ev.target.value)}
-            />
+            <h2>{equipoA} vs {equipoB}</h2>
 
-            <label>Fecha y Hora</label>
-            <div className="flex gap-1 " >
-            <input 
-            type="time" 
-            placeholder="Hora" 
-            value={hora}
-            onChange={ev => setHora(ev.target.value)}
-            />
-
-            {/* <label>Fecha</label> */}
-            <input 
-            type="date" 
-            placeholder="Fecha" 
-            value={fecha}
-            onChange={ev => setFecha(ev.target.value)}
-            />
-            </div>
-
-            <label>Hubicacion</label>
-            <input 
-            type="text" 
-            placeholder="Hubicacion" 
-            value={hubicacion}
-            onChange={ev => setHubicacion(ev.target.value)}
-            />
-
-            <label>Deporte</label>
+            <label>Ganador</label>
             <select 
-                value={category} 
-                onChange={ev => setCategory(ev.target.value)}
+                value={ganador} 
+                onChange={ev => setGanador(ev.target.value)}
             >
-                <option value=''>Elige una categoría</option> {/* Agrega esta opción con un valor vacío */}
-                {categories.length > 0 && categories.map(c => (
-                    <option value={c._id} key={c._id}>{c.name}</option>
-                ))}
+                <option key={'option1'} value={equipoA}>{equipoA}</option>
+                <option key={'option2'} value={equipoB}>{equipoB}</option>
             </select>
-            {propertiesToFill && propertiesToFill.length > 0 && propertiesToFill.map(p => (
-            <div key={p._id} className="flex gap-1">
-            <div>{p.name}</div>
-            <select
-              value={productProperties[p.name]}
-              onChange={ev => setProductProp(p.name, ev.target.value)}
-            >
-              {p.values && p.values.map(v => (
-                <option key={v} value={v}>{v}</option>
-              ))}
-            </select>
-          </div>
-        ))}
 
-            <label>Equipo A</label>
-            <select 
-                value={equipoA} 
-                onChange={ev => setEquipoA(ev.target.value)}
-            >
-                <option value='sin escuela'>Equipo A</option>
-                {escuelas.length > 0 && escuelas.map(c => (
-                <option value={c.title} key={c.title}>{c.title}</option>
-                ))}
-            </select>
-            
 
-            <label>Equipo B</label>
-            <select 
-                value={equipoB} 
-                onChange={ev => setEquipoB(ev.target.value)}
-            >
-                <option value='sin escuela'>Equipo B</option> 
-                {escuelas.length > 0 && escuelas.map(c => (
-                    <option value={c.title} key={c.title}>{c.title}</option>
-                ))}
-            </select>
-      
-            <label>Descripcion</label>
+            <label>Aclaraciones del Evento</label>
             <textarea 
               placeholder="descripcion"
               value={description}
               onChange={ev => setDescription(ev.target.value)}
             />
+           
 
-            <button 
+           <button 
               type="submit" 
               className="btn-primary">Guardar</button>
-              </form>
-    )
+    
+</form>
+  )
 }

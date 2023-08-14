@@ -7,6 +7,7 @@ export default async function handle(req, res) {
   await mongooseConnect();
   await isAdminRequest(req, res);
 
+
   if (method === 'GET') {
     if (req.query?.id) {
       try {
@@ -25,38 +26,40 @@ export default async function handle(req, res) {
     }
   }
 
-  if (method === 'POST') {
-    const { title, category, hubicacion, hora, description, fecha, equipoA, equipoB, properties } = req.body;
-    
-    Evento.create({
-      title,
-      category,
-      hubicacion,
-      hora,
-      description,
-      fecha,
-      equipoA,
-      equipoB,
-      properties
-    })
-      .then(eventDoc => {
-        res.json(eventDoc);
-      })
-      .catch(error => {
-        res.status(500).json({ error: 'Error al crear el evento' });
-      });
+ if (method === 'POST') {
+  const { title, category, hubicacion, hora, description, fecha, equipoA, equipoB, ganador, properties } = req.body;
+
+  Evento.create({
+    title,
+    category,
+    hubicacion,
+    hora,
+    description,
+    fecha,
+    equipoA,
+    equipoB,
+    ganador,
+    properties
+  })
+  .then(eventDoc => {
+    res.json(eventDoc);
+  })
+  .catch(error => {
+    res.status(500).json({ error: 'Error al crear el evento' });
+  });
   }
 
   if (method === 'PUT') {
-    const { title, category, hubicacion, hora, description, fecha, equipoA, equipoB, properties, _id } = req.body;
+    const { title, category, hubicacion, hora, description, fecha, equipoA, equipoB, ganador, properties, _id } = req.body;
+  
     try {
-      await Evento.updateOne({ _id }, { title, category, hubicacion, hora, description, fecha, equipoA, equipoB, properties });
+      await Evento.updateOne({ _id }, { title, category, hubicacion, hora, description, fecha, equipoA, equipoB, ganador, properties });
       res.json(true);
     } catch (error) {
       res.status(500).json({ error: 'Error al actualizar el evento' });
     }
   }
-
+  
   if (method === 'DELETE') {
     if (req.query?.id) {
       try {
@@ -66,5 +69,5 @@ export default async function handle(req, res) {
         res.status(500).json({ error: 'Error al eliminar el evento' });
       }
     }
-  }
+  }  
 }
