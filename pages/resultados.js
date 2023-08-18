@@ -21,6 +21,9 @@ export default function Resultados(){
             <h1>Resultados</h1>
             <table className="basic mt-2 ">
                 <thead>
+
+
+                    
                     <tr>
                       <td>Participantes</td>
                       <td>Ganador</td>
