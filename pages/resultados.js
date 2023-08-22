@@ -12,28 +12,47 @@ export default function Resultados(){
         })
     },[]);
 
+    
+    const [deportes,setDeportes] = useState([]);
+    useEffect(()=>{
+        axios.get('/api/categories').then(result =>{
+            setDeportes(result.data);
+        })
+    }, []);
+
+    console.log(deportes);
+
 
     const filteredProducts = products.filter(product => product.ganador && product.ganador);
-    console.log( products )
+    
 
     return(
         <Layout>
             <h1>Resultados</h1>
             <table className="basic mt-2 ">
                 <thead>
-
-
-                    
                     <tr>
                       <td>Participantes</td>
                       <td>Ganador</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredProducts.map(product => (
+                {filteredProducts.map(product => (
                         <tr key={product._id} >
                             <td>{product.equipoA} vs {product.equipoB}</td>
-                            <td>{product.ganador}</td>
+                            <td>
+                             {/* Buscar el nombre del deporte en el array deportes */}
+                             {deportes.find(deporte => deporte._id === product.category)?.name || 'Desconocido'}
+                             </td>
+                             <td>
+              {/* Mostrar los valores de las propiedades si existen */}
+              {product.properties && Object.keys(product.properties).map((key, index) => (
+                <td key={index}>
+                  <strong>{key}:</strong> {product.properties[key]}
+                </td>
+              ))}
+                </td>
+
 
                             <td>
                                 <Link className="btn-default" href={'/eventos/edit/'+product._id}>

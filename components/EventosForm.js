@@ -10,6 +10,10 @@ export default function EventoForm({
   _id,
   title: existingTitle,
   category: assignedCategory, 
+
+  properties:assignedPropertie,
+
+
   hubicacion: existingHubicacion,
   hora: existingHora,  
   description: existingDescription,  
@@ -35,10 +39,8 @@ export default function EventoForm({
 
   const [ganador, setGanador] = useState(existingGanador || '');
 
-  
 
-    const [productProperties,setProductProperties] = useState({});
-    
+    const [productProperties,setProductProperties] = useState(assignedPropertie || '');
     
     const [goToProducts,setGoToProducts] = useState(false);
     const [isUploading,setIsUploading] = useState(false);
