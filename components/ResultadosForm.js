@@ -118,8 +118,9 @@ const [title, setTitle] = useState(existingTitle || '');
                 value={ganador} 
                 onChange={ev => setGanador(ev.target.value)}
             >
-                <option key={'option1'} value={equipoA}>{equipoA}</option>
-                <option key={'option2'} value={equipoB}>{equipoB}</option>
+                <option key={'option1'} value='sin ganador'>Sin Ganador</option>
+                <option key={'option2'} value={equipoA}>{equipoA}</option>
+                <option key={'option3'} value={equipoB}>{equipoB}</option>
             </select>
 
 
