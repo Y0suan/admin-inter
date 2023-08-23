@@ -40,6 +40,7 @@ export default function Resultados(){
                 {filteredProducts.map(product => (
                         <tr key={product._id} >
                             <td>{product.equipoA} vs {product.equipoB}</td>
+                            <td>{product.ganador}</td>
                             <td>
                              {/* Buscar el nombre del deporte en el array deportes */}
                              {deportes.find(deporte => deporte._id === product.category)?.name || 'Desconocido'}

@@ -10,6 +10,7 @@ export const ResultadosForm = ({
   _id,
   title: existingTitle,
   category: assignedCategory, 
+  properties:assignedPropertie,
   hubicacion: existingHubicacion,
   hora: existingHora,  
   description: existingDescription,  
@@ -40,7 +41,8 @@ const [title, setTitle] = useState(existingTitle || '');
 
   
 
-    const [productProperties,setProductProperties] = useState({});
+  const [productProperties,setProductProperties] = useState(assignedPropertie || '');
+    
     
     
     const [goToProducts,setGoToProducts] = useState(false);
