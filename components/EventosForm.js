@@ -46,6 +46,17 @@ export default function EventoForm({
     const [isUploading,setIsUploading] = useState(false);
     const router = useRouter();
 
+
+
+    const [eventosExistentes,setEventosExistentes] = useState([]);
+    useEffect(()=>{
+        axios.get('/api/eventos').then(response =>{
+          setEventosExistentes(response.data);
+        })
+    },[]);
+
+
+
     useEffect(()=>{
         axios.get('/api/categories').then(result =>{
             setCategories(result.data);
@@ -65,6 +76,22 @@ export default function EventoForm({
           equipoA,equipoB,ganador,properties:productProperties
         };
         console.log(data);
+
+
+      //   const existingEvent = eventosExistentes.find(evento => 
+      //     evento.category === category && 
+      //     evento.equipoA === equipoA && 
+      //     evento.equipoB === equipoB &&
+      //     compareProperties(evento.properties, productProperties)
+      // );
+  
+      // if (existingEvent) {
+      //     alert("Ya existe un evento con la misma categoría, equipo A, equipo B y propiedades.");
+      //     return; // No guarda el evento si ya existe un evento con los mismos valores
+      // }
+
+
+
         if(_id){
             //update
             await axios.put('/api/eventos',{...data,_id});
@@ -105,45 +132,41 @@ export default function EventoForm({
       }
     }
     
-    console.log(productProperties);
+
+
+//     // Función para comparar propiedades
+// function compareProperties(propsA, propsB) {
+//   const propNamesA = propsA.map(prop => prop.name);
+//   const propNamesB = propsB.map(prop => prop.name);
+
+//   if (propNamesA.length !== propNamesB.length) {
+//       return false; // Las listas de propiedades no tienen la misma longitud
+//   }
+
+//   for (const propName of propNamesA) {
+//       const propA = propsA.find(prop => prop.name === propName);
+//       const propB = propsB.find(prop => prop.name === propName);
+
+//       if (!propA || !propB || propA.value !== propB.value) {
+//           return false; // Valor de propiedad diferente o propiedad faltante
+//       }
+//   }
+
+//   return true; // Todas las propiedades son iguales
+// }
+
     
     return(
             <form onSubmit={saveEvent}>
             
-            <label>Nombre del Evento</label>
+            {/* <label>Nombre del Evento</label>
             <input 
               type='text' 
               placeholder="nombre del Evento"
               value={title}
               onChange={ev => setTitle(ev.target.value)}
-            />
-
-            <label>Fecha y Hora</label>
-            <div className="flex gap-1 " >
-            <input 
-            type="time" 
-            placeholder="Hora" 
-            value={hora}
-            onChange={ev => setHora(ev.target.value)}
-            />
-
-            {/* <label>Fecha</label> */}
-            <input 
-            type="date" 
-            placeholder="Fecha" 
-            value={fecha}
-            onChange={ev => setFecha(ev.target.value)}
-            />
-            </div>
-
-            <label>Hubicacion</label>
-            <input 
-            type="text" 
-            placeholder="Hubicacion" 
-            value={hubicacion}
-            onChange={ev => setHubicacion(ev.target.value)}
-            />
-
+            /> */}
+            
             <label>Deporte</label>
             <select 
                 value={category} 
@@ -190,6 +213,33 @@ export default function EventoForm({
                     <option value={c.title} key={c.title}>{c.title}</option>
                 ))}
             </select>
+
+            <label>Fecha y Hora</label>
+            <div className="flex gap-1 " >
+            <input 
+            type="time" 
+            placeholder="Hora" 
+            value={hora}
+            onChange={ev => setHora(ev.target.value)}
+            />
+
+            {/* <label>Fecha</label> */}
+            <input 
+            type="date" 
+            placeholder="Fecha" 
+            value={fecha}
+            onChange={ev => setFecha(ev.target.value)}
+            />
+            </div>
+
+            <label>ubicacion</label>
+            <input 
+            type="text" 
+            placeholder="ubicacion" 
+            value={hubicacion}
+            onChange={ev => setHubicacion(ev.target.value)}
+            />
+
       
             <label>Descripcion</label>
             <textarea 
